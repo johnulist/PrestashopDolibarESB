@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="clientesprestashop">
+    <flow SubFlow="false" name="clientesprestashopFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="e6e1c55f-83f4-4aa0-af45-0a03ff639468">
+        <properties>
+            <property name="initialState"/>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="1"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address" value="vm://clientes"/>
+                    <property name="path"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <splitter index="3" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="updated"/>
+                    <property name=";INDEX" value="3"/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property-collection name="927bbcce-9de0-4d62-af94-091fa533727a">
+                        <property name="choice.otherwise" value="true"/>
+                        <property name="choice.expression" value=""/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                    <property-collection name="02baa453-4b34-46a9-923e-d3d9b17e033f">
+                        <property name="choice.expression" value="#[payload.request.op=='CREATE']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="373c4c6e-fef8-4f72-b5d9-32c7ce2cd83a">
+                        <property name="choice.expression" value="#[payload.request.op=='LIST']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value=""/>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+                <description></description>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+                    <properties>
+                        <property name="updated"/>
+                        <property name=";INDEX" value="3"/>
+                        <property name="tracking:enable-default-events" value="false"/>
+                        <property-collection name="927bbcce-9de0-4d62-af94-091fa533727a">
+                            <property name="choice.otherwise" value="true"/>
+                            <property name="choice.expression" value=""/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                        <property-collection name="02baa453-4b34-46a9-923e-d3d9b17e033f">
+                            <property name="choice.expression" value="#[payload.request.op=='CREATE']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value=""/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="373c4c6e-fef8-4f72-b5d9-32c7ce2cd83a">
+                            <property name="choice.expression" value="#[payload.request.op=='LIST']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value=""/>
+                            </property-collection>
+                        </property-collection>
+                    </properties>
+                </pattern>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="5" isChoiceOtherwiseLane="false" entity-id="373c4c6e-fef8-4f72-b5d9-32c7ce2cd83a">
+                        <pattern name="ListarClientes" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="updated"/>
+<property name="class" value="es.ual.itsi.clientes.ListarCliente"/>
+<property name="auxiliary;index" value="5"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;795109421">
+    <property name="ref" value=""/>
+    <property name="isProcessed$$$$ " value="true"/>
+</property-collection>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="7" isChoiceOtherwiseLane="false" entity-id="02baa453-4b34-46a9-923e-d3d9b17e033f">
+                        <pattern name="CrearClientes" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="updated"/>
+<property name="class" value="es.ual.itsi.clientes.CrearCliente"/>
+<property name="auxiliary;index" value="7"/>
+<property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;1444410777">
+    <property name="ref" value=""/>
+    <property name="isProcessed$$$$ " value="true"/>
+</property-collection>
+                            </properties>
+                            <description></description>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="9" isChoiceOtherwiseLane="true" entity-id="927bbcce-9de0-4d62-af94-091fa533727a">
+                        <pattern name="Echo" type="org.mule.tooling.ui.modules.core.pattern.echo" entity-id="Echo#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="auxiliary;index" value="9"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

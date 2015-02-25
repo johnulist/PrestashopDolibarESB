@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="prestashopflow">
+    <flow SubFlow="false" name="prestashopflowFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="388043a9-6959-4e1b-85d1-d18f27de6bd1">
+        <properties>
+            <property name="initialState"/>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="1"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="RequestResponse" name="HTTP" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="HTTP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value="8084"/>
+                    <property name="host" value="localhost"/>
+                    <property name="businessEventsLabel"/>
+                    <property name="followRedirects"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="keep-alive"/>
+                    <property name="contentType"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="password"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="httpLabel"/>
+                    <property name="address"/>
+                    <property name="path"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="method"/>
+                    <property name="user"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="SOAP#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="port" value=""/>
+                    <property name="wsdlLocation" value=""/>
+                    <property name="serviceClass" value="es.ual.itsi.prestashopsoap.SoapPshop"/>
+                    <property name="validationEnabled" value="false"/>
+                    <property name="updated"/>
+                    <property name="bindingId" value=""/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service"/>
+                    <property name="service" value=""/>
+                    <property name="mtomEnabled" value="false"/>
+                    <property name="enableMuleSoapHeaders" value="true"/>
+                    <property name="soapVersion" value="1.2"/>
+                    <property name="configuration-ref" value=""/>
+                    <property name="auxiliary;index" value="3"/>
+                    <property name="namespace" value=""/>
+                    <property-collection name="">
+                        <property name="auxiliary;erased;DATABINDING" value="true"/>
+                        <property name="DATABINDING" value=""/>
+                        <property name="class" value=""/>
+                        <property name="propertiesLabel" value=""/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/schemaLocations;198017426">
+                        <property name="isProcessed$$$$ " value="true"/>
+                    </property-collection>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-security-full;502926974">
+                        <property name="isProcessed$$$$ " value="true"/>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-config;1642696270">
+                            <property name="isProcessed$$$$ " value="true"/>
+                        </property-collection>
+                        <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/ws-custom-validator;1243646175">
+                            <property name="isProcessed$$$$ " value="true"/>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/bst-token-validator;1424617054">
+<property name="isProcessed$$$$ " value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/saml1-token-validator;2033300679">
+<property name="isProcessed$$$$ " value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/saml2-token-validator;777237242">
+<property name="isProcessed$$$$ " value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/signature-token-validator;1449926909">
+<property name="isProcessed$$$$ " value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/timestamp-token-validator;2030785240">
+<property name="isProcessed$$$$ " value="true"/>
+                            </property-collection>
+                            <property-collection name="@http://www.mulesoft.org/schema/mule/cxf/username-token-validator;746444058">
+<property name="isProcessed$$$$ " value="true"/>
+                            </property-collection>
+                        </property-collection>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <pattern name="Java" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="updated"/>
+                    <property name="class" value="es.ual.itsi.prestashopsoap.SoapPshopImpl"/>
+                    <property name="auxiliary;index" value="4"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/core/refInterceptorStackType;639278790">
+                        <property name="ref" value=""/>
+                        <property name="isProcessed$$$$ " value="true"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+            </pattern>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address" value="vm://pruebapshop"/>
+                    <property name="path"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="5"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                </properties>
+                <description></description>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

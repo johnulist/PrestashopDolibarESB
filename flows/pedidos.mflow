@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="Pedidos">
+    <flow SubFlow="false" name="PedidosFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="a4abebd0-77f1-4559-9509-3f5576d83f08">
+        <properties>
+            <property name="initialState"/>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+            <property name="bussinessEventsLabel"/>
+            <property name="tracking:enable-default-events"/>
+            <property name="auxiliary;index" value="1"/>
+        </properties>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address" value="vm://pedidos"/>
+                    <property name="path"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="mimeType"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="responseTimeout"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <splitter index="3" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="updated"/>
+                    <property name=";INDEX" value="3"/>
+                    <property name="tracking:enable-default-events" value="false"/>
+                    <property-collection name="ffdd95b9-cb91-446f-98ad-7ce2e071c971">
+                        <property name="choice.expression" value="#[payload.request.op=='CREATE']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="ef861b83-0780-4ce6-8fae-52103a68d070">
+                        <property name="choice.expression" value="#[payload.request.op=='LIST']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value=""/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="782e94a6-7f8b-4e8d-978e-7372ed6cc7c6">
+                        <property name="choice.otherwise" value="true"/>
+                        <property name="choice.expression" value=""/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                </properties>
+                <description></description>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+                    <properties>
+                        <property name="updated"/>
+                        <property name=";INDEX" value="3"/>
+                        <property name="tracking:enable-default-events" value="false"/>
+                        <property-collection name="ffdd95b9-cb91-446f-98ad-7ce2e071c971">
+                            <property name="choice.expression" value="#[payload.request.op=='CREATE']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value=""/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="ef861b83-0780-4ce6-8fae-52103a68d070">
+                            <property name="choice.expression" value="#[payload.request.op=='LIST']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value=""/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="782e94a6-7f8b-4e8d-978e-7372ed6cc7c6">
+                            <property name="choice.otherwise" value="true"/>
+                            <property name="choice.expression" value=""/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                    </properties>
+                </pattern>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="5" isChoiceOtherwiseLane="false" entity-id="ef861b83-0780-4ce6-8fae-52103a68d070">
+                        <pattern name="listarpedidos" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="class" value="es.ual.itsi.pedidos.ListarPedidos"/>
+<property name="auxiliary;index" value="5"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="7" isChoiceOtherwiseLane="false" entity-id="ffdd95b9-cb91-446f-98ad-7ce2e071c971">
+                        <pattern name="crearpedidos" type="http://www.mulesoft.org/schema/mule/core/component" entity-id="Java#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="class" value="es.ual.itsi.pedidos.CrearPedido"/>
+<property name="auxiliary;index" value="7"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="9" isChoiceOtherwiseLane="true" entity-id="782e94a6-7f8b-4e8d-978e-7372ed6cc7c6">
+                        <pattern name="Echo" type="org.mule.tooling.ui.modules.core.pattern.echo" entity-id="Echo#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="auxiliary;index" value="9"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+        </lane>
+    </flow>
+    <description>PedidosPrestashop</description>
+</mule-configuration>

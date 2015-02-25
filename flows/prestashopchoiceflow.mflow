@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="prestashopchoiceflow">
+    <flow SubFlow="false" name="prestashopchoiceflowFlow1" type="http://www.mulesoft.org/schema/mule/core/flow" entity-id="eaa29176-6f83-446d-8a63-af22292291b9">
+        <properties>
+            <property name="processingStrategy2" value=""/>
+            <property name="initialState" value="started"/>
+            <property name="bussinessEventsLabel" value=""/>
+            <property name="tracking:enable-default-events" value="false"/>
+            <property name="auxiliary;erased;processingStrategy2" value="true"/>
+            <property name="auxiliary;index" value="1"/>
+            <property name="updated"/>
+            <property-collection name="@http://www.mulesoft.org/schema/mule/ee/tracking/transaction;1905598974">
+                <property name="id" value=""/>
+                <property name="isProcessed$$$$ " value="true"/>
+            </property-collection>
+        </properties>
+        <description></description>
+        <lane hadOnlyOneElement="false" index="0" isChoiceOtherwiseLane="false" entity-id="compartment-lane#1">
+            <graphicalData x="0" y="0" width="0" height="0"/>
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="VM" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="businessEventsLabel"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="tracking:enable-default-events"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="address" value="vm://pruebapshop"/>
+                    <property name="path"/>
+                    <property name="encoding"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="auxiliary;index" value="2"/>
+                    <property name="responseTimeout"/>
+                    <property name="mimeType"/>
+                    <property name="connector-ref"/>
+                </properties>
+            </endpoint>
+            <pattern name="Logger" type="http://www.mulesoft.org/schema/mule/core/logger" entity-id="Logger#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="message" value="#[payload]"/>
+                    <property name="category"/>
+                    <property name="level" value="DEBUG"/>
+                    <property name="auxiliary;index" value="3"/>
+                </properties>
+            </pattern>
+            <splitter index="4" name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name=";INDEX" value="4"/>
+                    <property-collection name="b50e9998-d8be-4334-a81a-cfed4c6f5b28">
+                        <property name="choice.expression" value="#[payload.request.be=='ORDERS']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[payload.request.be=='ORDERS']"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="af041fa1-bedb-45f9-b460-4fb575993495">
+                        <property name="choice.expression" value="#[payload.request.be=='CLIENTS']"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[payload.request.be=='CLIENTS']"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="4e37e80e-ee80-4c12-94b7-585ee22e7c05">
+                        <property name="choice.expression" value="#[payload.request.be==&quot;PRODUCTS&quot;]"/>
+                        <property-collection name="choice.attributes">
+                            <property name="expression" value="#[payload.request.be==&quot;PRODUCTS&quot;]"/>
+                        </property-collection>
+                    </property-collection>
+                    <property-collection name="191bf989-93a4-4a15-9d50-60c2a29232a6">
+                        <property name="choice.otherwise" value="true"/>
+                        <property-collection name="choice.attributes"/>
+                    </property-collection>
+                </properties>
+                <pattern name="Choice" type="org.mule.tooling.ui.modules.core.pattern.cbr" entity-id="Choice#2">
+                    <properties>
+                        <property name=";INDEX" value="4"/>
+                        <property-collection name="b50e9998-d8be-4334-a81a-cfed4c6f5b28">
+                            <property name="choice.expression" value="#[payload.request.be=='ORDERS']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[payload.request.be=='ORDERS']"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="af041fa1-bedb-45f9-b460-4fb575993495">
+                            <property name="choice.expression" value="#[payload.request.be=='CLIENTS']"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[payload.request.be=='CLIENTS']"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="4e37e80e-ee80-4c12-94b7-585ee22e7c05">
+                            <property name="choice.expression" value="#[payload.request.be==&quot;PRODUCTS&quot;]"/>
+                            <property-collection name="choice.attributes">
+<property name="expression" value="#[payload.request.be==&quot;PRODUCTS&quot;]"/>
+                            </property-collection>
+                        </property-collection>
+                        <property-collection name="191bf989-93a4-4a15-9d50-60c2a29232a6">
+                            <property name="choice.otherwise" value="true"/>
+                            <property-collection name="choice.attributes"/>
+                        </property-collection>
+                    </properties>
+                </pattern>
+                <compartment entity-id="compartment#1">
+                    <lane hadOnlyOneElement="false" index="6" isChoiceOtherwiseLane="false" entity-id="4e37e80e-ee80-4c12-94b7-585ee22e7c05">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="vmProductos" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#2">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="businessEventsLabel"/>
+<property name="disableTransportTransformer"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="tracking:enable-default-events"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="address" value="vm://products"/>
+<property name="path"/>
+<property name="encoding"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="6"/>
+<property name="responseTimeout"/>
+<property name="mimeType"/>
+<property name="connector-ref"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="8" isChoiceOtherwiseLane="false" entity-id="af041fa1-bedb-45f9-b460-4fb575993495">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="vmClientes" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#3">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="businessEventsLabel"/>
+<property name="disableTransportTransformer"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="tracking:enable-default-events"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="address" value="vm://clientes"/>
+<property name="path"/>
+<property name="encoding"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="8"/>
+<property name="responseTimeout"/>
+<property name="mimeType"/>
+<property name="connector-ref"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="10" isChoiceOtherwiseLane="false" entity-id="b50e9998-d8be-4334-a81a-cfed4c6f5b28">
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="vmPedidos" type="http://www.mulesoft.org/schema/mule/vm/endpoint" entity-id="VM#4">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="businessEventsLabel"/>
+<property name="disableTransportTransformer"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="tracking:enable-default-events"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="address" value="vm://pedidos"/>
+<property name="path"/>
+<property name="encoding"/>
+<property name="responseTransformer-refs"/>
+<property name="auxiliary;index" value="10"/>
+<property name="responseTimeout"/>
+<property name="mimeType"/>
+<property name="connector-ref"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane hadOnlyOneElement="false" index="12" isChoiceOtherwiseLane="true" entity-id="191bf989-93a4-4a15-9d50-60c2a29232a6">
+                        <pattern name="Echo" type="org.mule.tooling.ui.modules.core.pattern.echo" entity-id="Echo#1">
+                            <graphicalData x="0" y="0" width="0" height="0"/>
+                            <properties>
+<property name="auxiliary;index" value="12"/>
+                            </properties>
+                        </pattern>
+                    </lane>
+                </compartment>
+            </splitter>
+            <pattern name="Java" type="org.mule.tooling.ui.modules.core.pattern.customTransformer" entity-id="Java#1">
+                <graphicalData x="0" y="0" width="0" height="0"/>
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="class" value="es.ual.itsi.transformer.JsonTransformer"/>
+                    <property name="auxiliary;index" value="13"/>
+                    <property name="mimeType"/>
+                </properties>
+            </pattern>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

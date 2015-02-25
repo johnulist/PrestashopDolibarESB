@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <flow name="productosprestashopFlow1" doc:name="productosprestashopFlow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" address="vm://products" doc:name="VM"/>
+        <choice doc:name="Choice">
+            <when expression="#[payload.request.op=='LIST']">
+                <component doc:name="listarproductos" class="es.ual.itsi.productos.ListarProductos"/>
+            </when>
+            <when expression="#[payload.request.op=='CREATE']">
+                <component doc:name="crearProducto" class="es.ual.itsi.productos.CrearProducto"/>
+            </when>
+            <otherwise>
+                <echo-component doc:name="Echo"/>
+            </otherwise>
+        </choice>
+    </flow>
+</mule>
